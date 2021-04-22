@@ -19,7 +19,7 @@ We will be using an open API from WHO.int to get information on the percentage o
 
 Day 1 - Project Proposal; Data cleaning (ETL) 
 
-Day 2 - JS and visualisations & HTML/CSS
+Day 2 - JavaScript and visualisations & HTML/CSS
 
 Day 3 - Work on story and fix up HTML CSS
 
