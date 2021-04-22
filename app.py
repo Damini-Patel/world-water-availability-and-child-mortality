@@ -11,15 +11,14 @@ from flask import Flask, jsonify
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("postgresql:///query.sql")
+engine = create_engine(f'postgresql://{username}:{password}@localhost:5432/Water_Mortalities')
 
 # reflect an existing database into a new model
 Base = automap_base()
 # reflect the tables
 Base.prepare(engine, reflect=True)
 
-# Save reference to the table
-## Passenger = Base.classes.passenger 
+session = Session(engine)
 
 #################################################
 # Flask Setup
@@ -30,6 +29,12 @@ app = Flask(__name__)
 #################################################
 # Flask Routes
 #################################################
+
+
+
+
+
+
 
 @app.route("/")
 def welcome():
