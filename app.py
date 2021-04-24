@@ -56,16 +56,36 @@ def names():
     all_water = []
     for country, year, accessibility_percentage in results:
         water_dict = {}
-        passenger_dict["country"] = country
-        passenger_dict["year"] = year
-        passenger_dict["accessibility_percentage"] = accessibility_percentage
+        water_dict["country"] = country
+        water_dict["year"] = year
+        water_dict["accessibility_percentage"] = accessibility_percentage
         all_water.append(water_dict)
 
     return jsonify(all_water)
 
 
+@app.route("/api/v1.0/mortality")
+def names():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
 
+    """Return a list of all mortality info"""
+    # Query all mortality data
+    results = session.query(Mortalities.country, Mortalities.year, Mortalities.gender, Mortalities.mortality_rate).all()
 
+    session.close()
+
+    # Create a dictionary from the row data and append to a list of all_mortalities
+    all_mortalities = []
+    for country, year, gender, mortality_rate in results:
+        mortality_dict = {}
+        mortality_dict["country"] = country
+        mortality_dict["year"] = year
+        mortality_dict["gender"] = gender
+        mortality_dict["mortality_rate"] = mortality_rate
+        all_mortalities.append(mortality_dict)
+
+    return jsonify(all_mortalities)
 
 if __name__ == '__main__':
     app.run(debug=True)
