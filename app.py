@@ -33,6 +33,34 @@ app = Flask(__name__)
 #################################################
 # Flask Routes
 #################################################
+
+# CREATE STATIC PAGES
+
+#Home page
+@app.route("/")
+def welcome():
+    """List static html page."""
+    return (
+
+    )
+
+#Water visulisation page
+@app.route("/")
+def welcome():
+    """List static html page."""
+    return (
+
+    )
+
+#Mortalities visulisation page
+@app.route("/")
+def welcome():
+    """List static html page."""
+    return (
+
+    )
+
+#Comparison visulisation page
 @app.route("/")
 def welcome():
     """List static html page."""
@@ -41,6 +69,9 @@ def welcome():
     )
 
 
+# CREATE API PAGES
+
+#Water API page
 @app.route("/api/v1.0/water")
 def names():
     # Create our session (link) from Python to the DB
@@ -64,6 +95,7 @@ def names():
     return jsonify(all_water)
 
 
+#Mortalities API page
 @app.route("/api/v1.0/mortality")
 def names():
     # Create our session (link) from Python to the DB
