@@ -1,11 +1,11 @@
 # Import SQLAlchemy `automap` and other dependencies here
-import sqlalchemy
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, inspect, func
 import psycopg2
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 
 
 #################################################
@@ -19,7 +19,7 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 #save references to each table
-Water = Base.classes.Water
+Water = Base.classes.water
 Mortalities = Base.classes.mortalities
 
 #Create Session (link) from Python to the DB
@@ -36,44 +36,41 @@ app = Flask(__name__)
 
 # CREATE STATIC PAGES
 
+
 #Home page
 @app.route("/")
-def welcome():
+def home():
     """List static html page."""
-    return (
+    return render_template("index.html")
 
-    )
 
 #Water visulisation page
-@app.route("/")
-def welcome():
+@app.route("/water")
+def water():
     """List static html page."""
-    return (
+    return render_template("water.html")
 
-    )
 
 #Mortalities visulisation page
-@app.route("/")
-def welcome():
+@app.route("/mortality")
+def mortality():
     """List static html page."""
-    return (
+    return render_template("mortality.html")
 
-    )
 
 #Comparison visulisation page
-@app.route("/")
-def welcome():
+@app.route("/comparison")
+def comparison():
     """List static html page."""
-    return (
-
-    )
+    return render_template("comparison.html")
 
 
 # CREATE API PAGES
 
+
 #Water API page
-@app.route("/api/v1.0/water")
-def names():
+@app.route("/api/v1.0/jwater")
+def jwater():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
@@ -96,8 +93,8 @@ def names():
 
 
 #Mortalities API page
-@app.route("/api/v1.0/mortality")
-def names():
+@app.route("/api/v1.0/jmortality")
+def jmortality():
     # Create our session (link) from Python to the DB
     session = Session(engine)
 
