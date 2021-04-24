@@ -12,5 +12,5 @@ id SERIAL PRIMARY KEY,
 country TEXT,
 year INT,
 gender TEXT,
-mortality_rate INT
+mortality_rate DECIMAL(3,2)
 );
