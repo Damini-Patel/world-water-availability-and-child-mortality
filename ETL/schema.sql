@@ -3,7 +3,7 @@ CREATE TABLE water (
 id SERIAL PRIMARY KEY, 
 country TEXT,
 year INT,
-accessibility_percentage DECIMAL(3,2)
+accessibility_percentage FLOAT
 );
 
 --Create table for mortalities
@@ -12,5 +12,5 @@ id SERIAL PRIMARY KEY,
 country TEXT,
 year INT,
 gender TEXT,
-mortality_rate DECIMAL(3,2)
+mortality_rate FLOAT
 );
