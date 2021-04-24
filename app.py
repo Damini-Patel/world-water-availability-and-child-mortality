@@ -33,6 +33,37 @@ app = Flask(__name__)
 #################################################
 # Flask Routes
 #################################################
+@app.route("/")
+def welcome():
+    """List static html page."""
+    return (
+
+    )
+
+
+@app.route("/api/v1.0/water")
+def names():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    """Return a list of all water info"""
+    # Query all water data
+    results = session.query(Water.country, Water.year, Water.accessibility_percentage).all()
+
+    session.close()
+
+    # Create a dictionary from the row data and append to a list of all_water
+    all_water = []
+    for country, year, accessibility_percentage in results:
+        water_dict = {}
+        passenger_dict["country"] = country
+        passenger_dict["year"] = year
+        passenger_dict["accessibility_percentage"] = accessibility_percentage
+        all_water.append(water_dict)
+
+    return jsonify(all_water)
+
+
 
 
 
