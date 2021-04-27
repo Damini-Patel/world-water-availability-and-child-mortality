@@ -11,7 +11,7 @@ from flask import Flask, jsonify, render_template
 #################################################
 # Database Setup
 #################################################
-engine = create_engine(f'postgresql://{"USERNAME"}:{PASSWORD}@localhost:5432/Water_Mortalities')
+engine = create_engine(f'postgresql://{USERNAME}:{PASSWORD}@localhost:5432/Water_Mortalities')
 
 # reflect an existing database into a new model
 Base = automap_base()
