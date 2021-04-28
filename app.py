@@ -21,6 +21,7 @@ Base.prepare(engine, reflect=True)
 #save references to each table
 Water = Base.classes.water
 Mortalities = Base.classes.mortalities
+Combined = Base.classes.combined
 
 #Create Session (link) from Python to the DB
 session = Session(engine)
@@ -116,5 +117,29 @@ def jmortality():
 
     return jsonify(all_mortalities)
 
+
+#Combined API page
+@app.route("/api/v1.0/jcomparison")
+def jcomparison():
+    # Create our session (link) from Python to the DB
+    session = Session(engine)
+
+    """Return a list of all combined info"""
+    # Query all water data
+    results = session.query(Combined.country, Combined.year, Combined.accessibility_percentage, Combined.mortality_rate).all()
+
+    session.close()
+
+    # Create a dictionary from the row data and append to a list of all_water
+    all_combined = []
+    for country, year, accessibility_percentage, mortality_rate in results:
+        combined_dict = {}
+        combined_dict["country"] = country
+        combined_dict["year"] = year
+        combined_dict["accessibility_percentage"] = accessibility_percentage
+        combined_dict["mortality_rate"] = mortality_rate
+        all_combined.append(combined_dict)
+
+    return jsonify(all_water)
 if __name__ == '__main__':
     app.run(debug=True)
