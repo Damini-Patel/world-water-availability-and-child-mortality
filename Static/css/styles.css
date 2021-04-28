@@ -20,7 +20,7 @@ body {
   /* Visual */
   background-color: #ededed52;
 
-  background-image: url('Static/images/WaterImage.jfif');
+  
 
 }
 
@@ -37,11 +37,11 @@ body {
 
 /* ----NAV START---- */
 .navbar-custom {
-  background-color: #666;
+  background-color: rgb(242, 245, 248);
 }
 #logo {
   /* Box-model */
-  height: 60px;
+  height: 40px;
   padding-top: 20px;
   padding-bottom: 5px;
 
@@ -52,10 +52,10 @@ body {
   /* Typography */
   font-size: 24px;
   font-weight: bold;
-  color: #fff;
+  color: rgb(65, 63, 63);
 
   /* Visual */
-  background: #666;
+  background: rgb(242, 245, 248);
 }
 
 /* Logo hover state */
@@ -72,13 +72,13 @@ body {
   /* Typography */
   font-family: Arial;
   font-weight: bold;
-  color: #fff;
+  color: rgb(242, 245, 248);
 }
 
 
 /* Nav element hover state */
 .navbar-default .navbar-nav > li > a:hover {
-  color: #fff;
+  color:  rgb(242, 245, 248);
 }
 
 /* Media query for nav */
