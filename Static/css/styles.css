@@ -6,8 +6,6 @@ html {
   /* Box-model */
   min-height: 100%;
 
-  
-
 }
 
 body {
@@ -18,9 +16,8 @@ body {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 
   /* Visual */
-  background-color: #ededed52;
+  background-color: #1fe0
 
-  
 
 }
 
@@ -29,7 +26,7 @@ body {
   /* Set background color to white on small screens */
   body {
     /* Visual */
-    background-color: #fff;
+    background-color: #1fe0;
   }
 }
 
@@ -111,6 +108,7 @@ body {
 
 /* -----NAV END---- */
 
+
 /* ----DESCRIPTION START---- */
 .description-header {
   /* Positioning */
@@ -150,7 +148,7 @@ body {
 
 #description-image {
   /* Positioning */
-  float: left;
+  /* float: left; */
 
   /* Box-model */
   /* width: 200px;
