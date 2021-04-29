@@ -74,10 +74,10 @@ d3.json("/api/v1.0/jcomparison").then(function (error, data) {
     .enter()
     .append("circle")
     .attr("cx", function (d) {
-      return x(d.GrLivArea);
+      return x(d.accessibility_percentage);
     })
     .attr("cy", function (d) {
-      return y(d.SalePrice);
+      return y(d.mortality_rate);
     })
     .attr("r", 7)
     .style("fill", "#69b3a2")
