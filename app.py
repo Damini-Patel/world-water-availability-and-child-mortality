@@ -140,6 +140,6 @@ def jcomparison():
         combined_dict["mortality_rate"] = mortality_rate
         all_combined.append(combined_dict)
 
-    return jsonify(all_water)
+    return jsonify(all_combined)
 if __name__ == '__main__':
     app.run(debug=True)

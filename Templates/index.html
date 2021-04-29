@@ -18,10 +18,10 @@
     <title>World Water Availbality and Child Mortality</title>
 
     <!-- Boostrap Stylesheet -->
-    <link rel="stylesheet" href="../Static/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" media="screen">
 
     <!-- Our own CSS stylesheet -->
-    <link rel="stylesheet" href="../Static/css/styles.css" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" media="screen">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -97,9 +97,9 @@
                 <h2 class="description-header">Links to Visualisations</h2>
                 <hr class="description-hr"/>
                     <div id="images">
-                      <a href="water.html"><img src=".png" alt="Description" class="imageNav-photo"></a>
-                      <a href="mortality.html"><img src=".png" alt="Description" class="imageNav-photo"></a>
-                      <a href="comparison.html"><img src=".png" alt="Description" class="imageNav-photo"></a>
+                      <a href="water"><img src=".png" alt="Description" class="imageNav-photo"></a>
+                      <a href="mortality"><img src=".png" alt="Description" class="imageNav-photo"></a>
+                      <a href="comparison"><img src=".png" alt="Description" class="imageNav-photo"></a>
                     </div>
                 </div>
               </section>
@@ -163,6 +163,8 @@
 
     <!-- Bootstrap CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="https://d3js.org/d3.v4.js"></script>
   </body>
 
 </html>
