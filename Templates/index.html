@@ -2,9 +2,7 @@
 <html lang="en-us">
   <style>
     html {
-      /* background: url("https://www.waboreservices.com.au/wp-content/uploads/2015/10/Maintenance-1-300x200.jpg"); */
       background: url("https://media.istockphoto.com/photos/hands-fresh-drinking-water-picture-id849853896?k=6&m=849853896&s=170667a&w=0&h=MTLTf_byL_a9LRJpkdNrkXTiYnFT2lJ3oCSShTJwUxw=");
-      /* background: url("https://images.fineartamerica.com/images-medium-large-5/blue-water-droplet-splash-dwayne-schnell.jpg") no-repeat center fixed; */
       background-size: cover;
     }
     </style>  
@@ -23,8 +21,8 @@
     <!-- Our own CSS stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" media="screen">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://d3js.org/d3.v4.js"></script> -->
+
   </head>
 
   <body>
@@ -60,7 +58,7 @@
 
                  <li><a href="water">Water Availbality</a></li>
                   <li><a href="mortality">Mortality Rate</a></li>
-                  <li><a href="comparison">Bubble moving graph</a></li>
+                  <li><a href="comparison">Comparison</a></li>
 
                   </ul>
               </li>
@@ -74,22 +72,8 @@
       <!-- Add Jumbotron to Header -->
       <div class="jumbotron text-center">
           <h1>Does the availabilty of water effect child mortality rates?</h1>
-          <!-- <img src = "https://www.bing.com/th/id/OGC.5e693657feb24f8843988745cf00e1e8?pid=1.7&rurl=https%3a%2f%2fgiffiles.alphacoders.com%2f518%2f51815.gif&ehk=V77Ak7KAaf7D0FUniZZGUFc6qFB3nqC0HO%2bNHf3zVpI%3d" class = "img-fluid" alt = "water"> -->
     </div>
     <!-- Start of container -->
-    <div class="container">
-      <section class="row">
-        <div class="col-md-8">
-          <article class="description-content">
-            <h1 class="description-header">Key Facts:</h1>
-            <hr class="description-hr"/>
-            <p>"The leading causes of death among children under five in 2017 were preterm birth complications, acute respiratory infections, intrapartum-related complications, congenital anomalies and diarrhea. Neonatal deaths accounted for 47% of under-five deaths in 2017."</p>
-            <p>"In 2017, 71% of the global population (5.3 billion people) used a safely managed drinking-water service – that is, one located on premises, available when needed, and free from contamination."</p>
-            <p>"Globally, at least 2 billion people use a drinking water source contaminated with faeces"</p>
-            <p>"Contaminated water can transmit diseases such diarrhoea, cholera, dysentery, typhoid, and polio."</p>
-          </article>
-        </div>
-
         <div class="container">
           <section class="row">
             <div class="col-md-4">
@@ -101,13 +85,12 @@
                       <a href="mortality"><img src=".png" alt="Description" class="imageNav-photo"></a>
                       <a href="comparison"><img src=".png" alt="Description" class="imageNav-photo"></a>
                     </div>
-                </div>
-              </section>
-            <!-- End of the Visualizations imageNav Area -->
-
             </div>
           </section>
-        </div>
+            <!-- End of the Visualizations imageNav Area -->
+
+        </div> 
+    </div>
     <!-- End of container -->
 
     <div class="container">
@@ -122,19 +105,19 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
           <div class="item active">
-            <img src="\Static\images\Fact1.png" alt="Fact1" style="width:100%;">
+            <img src="{{ url_for('static', filename='images/Fact1.png') }}" alt="Fact1" style="width:100%;">
           </div>
     
           <div class="item">
-            <img src="\Static\images\Fact2.png" alt="Fact2" style="width:100%;">
+            <img src="{{ url_for('static', filename='images/Fact2.png') }}" alt="Fact2" style="width:100%;">
           </div>
         
           <div class="item">
-            <img src="\Static\images\Fact3.png" alt="Fact3" style="width:100%;">
+            <img src="{{ url_for('static', filename='images/Fact3.png') }}" alt="Fact3" style="width:100%;">
           </div>
 
           <div class="item">
-            <img src="\Static\images\Fact4.png" alt="Fact4" style="width:100%;">
+            <img src="{{ url_for('static', filename='images/Fact4.png') }}" alt="Fact4" style="width:100%;">
           </div>
         </div>
     
@@ -164,7 +147,8 @@
     <!-- Bootstrap CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </body>
 
 </html>
