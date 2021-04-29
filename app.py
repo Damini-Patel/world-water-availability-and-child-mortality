@@ -90,7 +90,7 @@ def jwater():
         water_dict["accessibility_percentage"] = accessibility_percentage
         all_water.append(water_dict)
 
-    return jsonify(all_water)
+    return jsonify({"data":all_water})
 
 
 #Mortalities API page
@@ -115,7 +115,7 @@ def jmortality():
         mortality_dict["mortality_rate"] = mortality_rate
         all_mortalities.append(mortality_dict)
 
-    return jsonify(all_mortalities)
+    return jsonify({"data":all_mortalities})
 
 
 #Combined API page
@@ -140,6 +140,6 @@ def jcomparison():
         combined_dict["mortality_rate"] = mortality_rate
         all_combined.append(combined_dict)
 
-    return jsonify(all_combined)
+    return jsonify({"data":all_combined})
 if __name__ == '__main__':
     app.run(debug=True)

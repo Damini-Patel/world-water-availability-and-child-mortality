@@ -22,6 +22,7 @@
 
     <!-- Our own CSS stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" media="screen">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
   </head>
 
@@ -72,11 +73,11 @@
 <div class="container">
     <section class="row">
       <div class="col-md-12">
-        <article class="description-content">
+        <!-- <article class="description-content"> -->
           <h1 class="description-header">graph</h1>
-          <script src="Static/javascript/mortality.js"></script>
+          <script src="{{ url_for('static', filename='javascript/mortalities.js') }}"></script>
           <hr class="description-hr"/>
-        </article>
+        <!-- </article> -->
       </div>
 
       <div class="container">

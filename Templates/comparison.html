@@ -22,6 +22,7 @@
 
     <!-- Our own CSS stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" media="screen">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
   </head>
 
@@ -74,7 +75,7 @@
       <div class="col-md-12">
         <article class="description-content">
           <h1 class="description-header">graph</h1>
-          <script src="Static/javascript/combined.js"></script>
+          <script src="{{ url_for('static', filename='javascript/combined.js') }}"></script>
           <hr class="description-hr"/>
         </article>
       </div>
