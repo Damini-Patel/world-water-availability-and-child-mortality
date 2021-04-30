@@ -13,7 +13,9 @@ var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 // Select body, append SVG area to it, and set the dimensions
 var svg = d3
-  .select("body")
+  .select(".graph-section")
+  .append("div")
+  .classed("graph", true)
   .append("svg")
   .attr("height", svgHeight)
   .attr("width", svgWidth);
@@ -69,29 +71,6 @@ d3.json("/api/v1.0/jmortality")
       .attr("y", (d) => yLinearScale(d.mortality_rate))
       .attr("width", xBandScale.bandwidth())
       .attr("height", (d) => chartHeight - yLinearScale(d.mortality_rate));
-
-    // Step 1: Initialize Tooltip
-    var toolTip = d3
-      .tip()
-      .attr("class", "tooltip")
-      .offset([80, -60])
-      .html(function (d) {
-        return `Country: <strong>${d.country}</strong><hr> Mortality Rate:${d.mortality_rate}
-       %`;
-      });
-
-    // Step 2: Create the tooltip in chartGroup.
-    chartGroup.call(toolTip);
-
-    // Step 3: Create "mouseover" event listener to display tooltip
-    chartGroup
-      .on("mouseover", function (d) {
-        toolTip.show(d, this);
-      })
-      // Step 4: Create "mouseout" event listener to hide tooltip
-      .on("mouseout", function (d) {
-        toolTip.hide(d);
-      });
   })
   .catch(function (error) {
     console.log(error);
