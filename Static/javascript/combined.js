@@ -1,89 +1,125 @@
-// set the dimensions and margins of the graph
-var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-  width = 460 - margin.left - margin.right,
-  height = 450 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
+// Define SVG area dimensions
+var svgWidth = 1200;
+var svgHeight = 660;
+// Define the chart's margins as an object
+var chartMargin = {
+  top: 30,
+  right: 30,
+  bottom: 30,
+  left: 30,
+};
+// Define dimensions of the chart area
+var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
+var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
+// Select body, append SVG area to it, and set the dimensions
 var svg = d3
-  .select("#body")
+  .select("body")
   .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+  .attr("height", svgHeight)
+  .attr("width", svgWidth);
+// Append a group to the SVG area and shift ('translate') it to the right and to the bottom
+var chartGroup = svg
   .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
+// Import Data
 //Read the data
-d3.json("/api/v1.0/jcomparison").then(function (error, data) {
-  data.forEach(function (d) {
-    d.country = d.country;
-    d.accessibility_percentage = +d.accessibility_percentage;
-    d.mortality_rate = +d.mortality_rate;
-  });
+d3.json("/api/v1.0/jcomparison")
+  .then(function (d) {
+    console.log(d);
+    data = d.data;
 
-  // Add X axis
-  var x = d3.scaleLinear().domain([0, 3000]).range([0, width]);
-  svg
-    .append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
+    // Step 1: Parse Data/Cast as numbers
+    // ==============================
+    data.forEach(function (d) {
+      d.country = d.country;
+      d.accessibility_percentage = +d.accessibility_percentage;
+      d.mortality_rate = +d.mortality_rate;
+    });
 
-  // Add Y axis
-  var y = d3.scaleLinear().domain([0, 400000]).range([height, 0]);
-  svg.append("g").call(d3.axisLeft(y));
+    // Step 2: Create scale functions
+    // ==============================
+    var width = 1000;
+    var height = 500;
 
-  // Add a tooltip div. Here I define the general feature of the tooltip: stuff that do not depend on the data point.
-  // Its opacity is set to 0: we don't see it by default.
-  var tooltip = d3
-    .select("#my_dataviz")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "1px")
-    .style("border-radius", "5px")
-    .style("padding", "10px");
+    var xLinearScale = d3
+      .scaleLinear()
+      .domain([20, d3.max(data, (d) => d.accessibility_percentage)])
+      .range([0, width]);
 
-  // A function that change this tooltip when the user hover a point.
-  // Its opacity is set to 1: we can now see it. Plus it set the text and position of tooltip depending on the datapoint (d)
-  var mouseover = function (d) {
-    tooltip.style("opacity", 1);
-  };
+    var yLinearScale = d3
+      .scaleLinear()
+      .domain([0, d3.max(data, (d) => d.mortality_rate)])
+      .range([height, 0]);
 
-  var mousemove = function (d) {
-    tooltip
-      .html("The exact value of<br>the Ground Living area is: " + d.GrLivArea)
-      .style("left", d3.mouse(this)[0] + 90 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-      .style("top", d3.mouse(this)[1] + "px");
-  };
+    // Step 3: Create axis functions
+    // ==============================
+    var bottomAxis = d3.axisBottom(xLinearScale);
+    var leftAxis = d3.axisLeft(yLinearScale);
 
-  // A function that change this tooltip when the leaves a point: just need to set opacity to 0 again
-  var mouseleave = function (d) {
-    tooltip.transition().duration(200).style("opacity", 0);
-  };
+    // Step 4: Append Axes to the chart
+    // ==============================
+    chartGroup
+      .append("g")
+      .attr("transform", `translate(0, ${height})`)
+      .call(bottomAxis);
 
-  // Add dots
-  svg
-    .append("g")
-    .selectAll("dot")
-    .data(
-      data.filter(function (d, i) {
-        return i < 50;
+    chartGroup.append("g").call(leftAxis);
+
+    // Step 5: Create Circles
+    // ==============================
+    var circlesGroup = chartGroup
+      .selectAll("circle")
+      .data(data)
+      .enter()
+      .append("circle")
+      .attr("cx", (d) => xLinearScale(d.accessibility_percentage))
+      .attr("cy", (d) => yLinearScale(d.mortality_rate))
+      .attr("r", "15")
+      .attr("fill", "teal")
+      .attr("opacity", ".5");
+
+    // Step 6: Initialize tool tip
+    // ==============================
+    var toolTip = d3
+      .tip()
+      .attr("class", "tooltip")
+      .offset([80, -60])
+      .html(function (d) {
+        return `${d.country}<br>Water Accessibility: ${d.accessibility_percentage}<br>Mortality Rate: ${d.mortality_rate}`;
+      });
+
+    // Step 7: Create tooltip in the chart
+    // ==============================
+    chartGroup.call(toolTip);
+
+    // Step 8: Create event listeners to display and hide the tooltip
+    // ==============================
+    circlesGroup
+      .on("click", function (data) {
+        toolTip.show(data, this);
       })
-    ) // the .filter part is just to keep a few dots on the chart, not all of them
-    .enter()
-    .append("circle")
-    .attr("cx", function (d) {
-      return x(d.accessibility_percentage);
-    })
-    .attr("cy", function (d) {
-      return y(d.mortality_rate);
-    })
-    .attr("r", 7)
-    .style("fill", "#69b3a2")
-    .style("opacity", 0.3)
-    .style("stroke", "white")
-    .on("mouseover", mouseover)
-    .on("mousemove", mousemove)
-    .on("mouseleave", mouseleave);
-});
+      // onmouseout event
+      .on("mouseout", function (data, index) {
+        toolTip.hide(data);
+      });
+
+    // Create axes labels
+    chartGroup
+      .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 40)
+      .attr("x", 0 - height / 2)
+      .attr("dy", "1em")
+      .attr("class", "axisText")
+      .text("Number of Billboard 100 Hits");
+
+    chartGroup
+      .append("text")
+      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("class", "axisText")
+      .text("Hair Metal Band Hair Length (inches)");
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
