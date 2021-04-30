@@ -319,6 +319,14 @@ html {
   overflow: scroll;
 }
 
+.bar {
+  fill: teal;
+}
+
+.bar:hover {
+  fill: orange;
+}
+
 /* Tooltips and graphs */
 
 .tooltip {

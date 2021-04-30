@@ -58,6 +58,7 @@ d3.json("/api/v1.0/jmortality")
       .attr("class", "axis axis--x")
       .attr("transform", `translate(0, ${chartHeight})`)
       .call(bottomAxis);
+
     // Create one SVG rectangle per piece of tvData
     // Use the linear and band scales to position each rectangle within the chart
     chartGroup
@@ -76,19 +77,20 @@ d3.json("/api/v1.0/jmortality")
     // ==============================
     var toolTip = d3
       .tip()
-      .attr("class", "tooltip")
-      .offset([80, -60])
+      .attr("class", "d3-tip")
+      .offset([-10, 0])
       .html(function (d) {
+        console.log(d);
         return `<strong>${d.country}</strong><br><strong>Mortality Rate: </strong>${d.mortality_rate}%`;
       });
 
     // Step 7: Create tooltip in the chart
     // ==============================
-    circlesGroup.call(toolTip);
+    chartGroup.call(toolTip);
 
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
-    circlesGroup
+    chartGroup
       .on("mouseover", function (data) {
         toolTip.show(data, this);
       })

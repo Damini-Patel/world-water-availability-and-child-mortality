@@ -75,7 +75,7 @@ d3.json("/api/v1.0/jwater")
     // ==============================
     var toolTip = d3
       .tip()
-      .attr("class", "tooltip")
+      .attr("class", "d3-tip")
       .offset([-10, 0])
       .html(function (d) {
         console.log(d);
