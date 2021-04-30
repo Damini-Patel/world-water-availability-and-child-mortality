@@ -70,6 +70,32 @@ d3.json("/api/v1.0/jwater")
         "height",
         (d) => chartHeight - yLinearScale(d.accessibility_percentage)
       );
+
+    // Step 6: Initialize tool tip
+    // ==============================
+    var toolTip = d3
+      .tip()
+      .attr("class", "tooltip")
+      .offset([-10, 0])
+      .html(function (d) {
+        console.log(d);
+        return `<strong>${d.country}</strong><br><strong>Water Accessibility: </strong>${d.accessibility_percentage}%`;
+      });
+
+    // Step 7: Create tooltip in the chart
+    // ==============================
+    chartGroup.call(toolTip);
+
+    // Step 8: Create event listeners to display and hide the tooltip
+    // ==============================
+    chartGroup
+      .on("mouseover", function (data) {
+        toolTip.show(data, this);
+      })
+      // onmouseout event
+      .on("mouseout", function (data, index) {
+        toolTip.hide(data);
+      });
   })
   .catch(function (error) {
     console.log(error);

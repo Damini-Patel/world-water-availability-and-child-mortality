@@ -5,7 +5,7 @@ var svgHeight = 660;
 var chartMargin = {
   top: 30,
   right: 30,
-  bottom: 30,
+  bottom: 50,
   left: 30,
 };
 // Define dimensions of the chart area
@@ -88,17 +88,17 @@ d3.json("/api/v1.0/jcomparison")
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function (d) {
-        return `${d.country}<br>Water Accessibility: ${d.accessibility_percentage}<br>Mortality Rate: ${d.mortality_rate}`;
+        return `<strong>${d.country}</strong><br><strong>Water Accessibility: </strong>${d.accessibility_percentage}%<br><strong>Mortality Rate: </strong>${d.mortality_rate}%`;
       });
 
     // Step 7: Create tooltip in the chart
     // ==============================
-    chartGroup.call(toolTip);
+    circlesGroup.call(toolTip);
 
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
     circlesGroup
-      .on("click", function (data) {
+      .on("mouseover", function (data) {
         toolTip.show(data, this);
       })
       // onmouseout event
@@ -114,13 +114,13 @@ d3.json("/api/v1.0/jcomparison")
       .attr("x", 0 - height / 2)
       .attr("dy", "1em")
       .attr("class", "axisText")
-      .text("Number of Billboard 100 Hits");
+      .text("Percentage of population with Basic Water accessibility");
 
     chartGroup
       .append("text")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Hair Metal Band Hair Length (inches)");
+      .text("Mortality Rate in children under 5");
   })
   .catch(function (error) {
     console.log(error);

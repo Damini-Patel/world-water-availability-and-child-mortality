@@ -71,6 +71,31 @@ d3.json("/api/v1.0/jmortality")
       .attr("y", (d) => yLinearScale(d.mortality_rate))
       .attr("width", xBandScale.bandwidth())
       .attr("height", (d) => chartHeight - yLinearScale(d.mortality_rate));
+
+    // Step 6: Initialize tool tip
+    // ==============================
+    var toolTip = d3
+      .tip()
+      .attr("class", "tooltip")
+      .offset([80, -60])
+      .html(function (d) {
+        return `<strong>${d.country}</strong><br><strong>Mortality Rate: </strong>${d.mortality_rate}%`;
+      });
+
+    // Step 7: Create tooltip in the chart
+    // ==============================
+    circlesGroup.call(toolTip);
+
+    // Step 8: Create event listeners to display and hide the tooltip
+    // ==============================
+    circlesGroup
+      .on("mouseover", function (data) {
+        toolTip.show(data, this);
+      })
+      // onmouseout event
+      .on("mouseout", function (data, index) {
+        toolTip.hide(data);
+      });
   })
   .catch(function (error) {
     console.log(error);

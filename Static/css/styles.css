@@ -318,3 +318,26 @@ html {
 .graph-section .graph {
   overflow: scroll;
 }
+
+/* Tooltips and graphs */
+
+.tooltip {
+  position: absolute;
+  width: 135px;
+  height: 90px;
+  padding: 2px;
+  padding-top: 8px;
+  font: 12px sans-serif;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  background: #eae2f5;
+  border: 0;
+  border-radius: 10px;
+}
+
+.axisText {
+  font-family: sans-serif;
+  font-weight: bold;
+  fill: #000000;
+  text-anchor: middle;
+}
